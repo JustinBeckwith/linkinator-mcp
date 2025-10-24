@@ -1,0 +1,56 @@
+{
+	"name": "linkinator-mcp",
+	"version": "0.1.0",
+	"description": "MCP server for link checking using linkinator",
+	"main": "build/index.js",
+	"bin": {
+		"linkinator-mcp": "build/index.js"
+	},
+	"files": [
+		"build"
+	],
+	"type": "module",
+	"scripts": {
+		"build": "tsc && chmod 755 build/index.js",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage",
+		"lint": "biome lint .",
+		"fix": "biome check --write .",
+		"format": "biome format --write .",
+		"prepare": "husky"
+	},
+	"keywords": [
+		"mcp",
+		"linkinator",
+		"link-checker",
+		"broken-links"
+	],
+	"author": "Justin Beckwith <justin.beckwith@gmail.com>",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/JustinBeckwith/linkinator-mcp.git"
+	},
+	"bugs": {
+		"url": "https://github.com/JustinBeckwith/linkinator-mcp/issues"
+	},
+	"homepage": "https://github.com/JustinBeckwith/linkinator-mcp#readme",
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.2.7",
+		"@commitlint/cli": "^20.1.0",
+		"@commitlint/config-conventional": "^20.0.0",
+		"@types/node": "^24.9.1",
+		"husky": "^9.1.7",
+		"typescript": "^5.9.3",
+		"vitest": "^4.0.2"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.20.2",
+		"linkinator": "^7.3.0",
+		"zod": "^3.25.76"
+	}
+}
