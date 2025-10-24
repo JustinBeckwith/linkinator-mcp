@@ -4,3 +4,7 @@ dist
 .DS_Store
 *.log
 .claude
+coverage
+
+# MCP registry token files
+.mcpregistry_*

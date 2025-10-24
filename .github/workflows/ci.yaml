@@ -27,7 +27,7 @@ jobs:
       - run: node --version
       - run: npm ci
       - run: npm run build
-      - run: npm test
+      - run: npm run test:coverage
       - name: coverage
         uses: codecov/codecov-action@v5
         with:

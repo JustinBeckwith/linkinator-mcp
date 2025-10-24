@@ -41,3 +41,9 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm publish --provenance --access public
+      - name: Install MCP Publisher
+        run: brew install mcp-publisher
+      - name: Login to MCP Registry
+        run: mcp-publisher login github-oidc
+      - name: Publish to MCP Registry
+        run: mcp-publisher publish
