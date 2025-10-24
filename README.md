@@ -1,6 +1,6 @@
 # Linkinator MCP Server
 
-[![npm version](https://badge.fury.io/js/linkinator-mcp.svg)](https://www.npmjs.com/package/linkinator-mcp)
+[![npm version](https://img.shields.io/npm/v/linkinator-mcp.svg)](https://www.npmjs.com/package/linkinator-mcp)
 [![CI](https://github.com/JustinBeckwith/linkinator-mcp/actions/workflows/ci.yaml/badge.svg)](https://github.com/JustinBeckwith/linkinator-mcp/actions/workflows/ci.yaml)
 [![Biome](https://img.shields.io/badge/code%20style-biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev/)
 [![codecov](https://codecov.io/gh/JustinBeckwith/linkinator-mcp/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinBeckwith/linkinator-mcp)
@@ -18,40 +18,23 @@ A Model Context Protocol (MCP) server that provides link checking capabilities u
 - **Flexible Configuration**: Extensive options for timeouts, retries, SSL, and more
 - **Detailed Reporting**: Get status codes, broken links grouped by error type, and parent page information
 
-## Installation
+## Quick Setup (Automatic)
 
-### From Source
-
-1. Clone this repository:
+The easiest way to get started is using the `install-mcp` tool, which automatically configures linkinator-mcp for Claude Desktop, Claude Code, Cursor, Cline, and other MCP clients:
 
 ```bash
-git clone https://github.com/JustinBeckwith/linkinator-mcp.git
-cd linkinator-mcp
+npx install-mcp linkinator-mcp --client claude
 ```
 
-2. Install dependencies:
+This handles all configuration automatically. Restart your Claude client after installation.
 
-```bash
-npm install
-```
+## Manual Configuration
 
-3. Build the project:
+If you prefer to configure the server manually, you can edit your MCP client's configuration file directly.
 
-```bash
-npm run build
-```
+### Claude Code
 
-### From npm (when published)
-
-```bash
-npm install -g linkinator-mcp
-```
-
-## Configuration for Claude Code
-
-To use this MCP server with Claude Code, you need to add it to your Claude Code configuration file.
-
-### macOS/Linux
+#### macOS/Linux
 
 Edit `~/.config/claude-code/config.json`:
 
@@ -59,14 +42,14 @@ Edit `~/.config/claude-code/config.json`:
 {
   "mcpServers": {
     "linkinator": {
-      "command": "node",
-      "args": ["/absolute/path/to/linkinator-mcp/build/index.js"]
+      "command": "npx",
+      "args": ["linkinator-mcp"]
     }
   }
 }
 ```
 
-### Windows
+#### Windows
 
 Edit `%APPDATA%\claude-code\config.json`:
 
@@ -74,16 +57,16 @@ Edit `%APPDATA%\claude-code\config.json`:
 {
   "mcpServers": {
     "linkinator": {
-      "command": "node",
-      "args": ["C:\\absolute\\path\\to\\linkinator-mcp\\build\\index.js"]
+      "command": "npx",
+      "args": ["linkinator-mcp"]
     }
   }
 }
 ```
 
-### Using npm global installation
+#### Alternative: Global Installation
 
-If you installed globally via npm:
+If you prefer to install the package globally first with `npm install -g linkinator-mcp`, you can simplify the configuration:
 
 ```json
 {
@@ -95,9 +78,41 @@ If you installed globally via npm:
 }
 ```
 
-### Restart Claude Code
+### Claude Desktop
 
-After updating the configuration, restart Claude Code for the changes to take effect.
+#### macOS/Linux
+
+Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "linkinator": {
+      "command": "npx",
+      "args": ["linkinator-mcp"]
+    }
+  }
+}
+```
+
+#### Windows
+
+Edit `%APPDATA%\Claude\claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "linkinator": {
+      "command": "npx",
+      "args": ["linkinator-mcp"]
+    }
+  }
+}
+```
+
+### Restart Your Client
+
+After updating the configuration, restart your Claude client for the changes to take effect.
 
 ## Usage Examples
 
@@ -105,25 +120,25 @@ Once configured, you can ask Claude to check links on any webpage or local file.
 
 ### Basic Link Checking
 
-```
+```text
 Check all the links on https://example.com
 ```
 
 ### Recursive Scanning
 
-```
+```text
 Scan https://example.com recursively and check all links on the same domain
 ```
 
 ### Local File Checking
 
-```
+```text
 Check the links in /path/to/my/documentation/index.html
 ```
 
 ### Advanced Options
 
-```
+```text
 Check https://example.com with the following options:
 - Recurse through all pages
 - Check CSS for URLs
@@ -179,7 +194,7 @@ The `scan_page` tool supports all of linkinator's CLI options:
 
 The tool returns a formatted report showing:
 
-```
+```text
 Linkinator Scan Results for: https://example.com
 
 Summary:
@@ -223,7 +238,7 @@ chmod +x /path/to/linkinator-mcp/build/index.js
 
 If scanning local files and getting port errors, try specifying a port:
 
-```
+```text
 Check /path/to/files with port 9000
 ```
 

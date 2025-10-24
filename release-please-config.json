@@ -4,7 +4,19 @@
 			"release-type": "node",
 			"package-name": "linkinator-mcp",
 			"changelog-path": "CHANGELOG.md",
-			"extra-files": ["package.json"]
+			"extra-files": [
+				"package.json",
+				{
+					"type": "json",
+					"path": "server.json",
+					"jsonpath": "$.version"
+				},
+				{
+					"type": "json",
+					"path": "server.json",
+					"jsonpath": "$.packages[0].version"
+				}
+			]
 		}
 	}
 }
