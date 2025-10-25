@@ -2,6 +2,7 @@
 	"name": "linkinator-mcp",
 	"version": "0.2.0",
 	"description": "MCP server for link checking using linkinator",
+	"mcpName": "io.github.JustinBeckwith/linkinator-mcp",
 	"main": "build/index.js",
 	"bin": {
 		"linkinator-mcp": "build/index.js"
@@ -18,6 +19,7 @@
 		"lint": "biome lint .",
 		"fix": "biome check --write .",
 		"format": "biome format --write .",
+		"validate:mcp": "node scripts/validate-mcp.js",
 		"prepare": "husky"
 	},
 	"keywords": [
@@ -45,6 +47,8 @@
 		"@commitlint/config-conventional": "^20.0.0",
 		"@types/node": "^24.9.1",
 		"@vitest/coverage-v8": "^4.0.3",
+		"ajv": "^8.17.1",
+		"ajv-formats": "^3.0.1",
 		"husky": "^9.1.7",
 		"typescript": "^5.9.3",
 		"vitest": "^4.0.2"

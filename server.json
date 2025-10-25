@@ -6,6 +6,13 @@
     "url": "https://github.com/JustinBeckwith/linkinator-mcp",
     "source": "github"
   },
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/JustinBeckwith/linkinator-mcp/main/site/linkinator-mcp.webp",
+      "mimeType": "image/webp",
+      "sizes": ["any"]
+    }
+  ],
   "version": "0.2.0",
   "packages": [
     {
