@@ -1,1 +1,2 @@
+npm run validate:mcp
 npm test

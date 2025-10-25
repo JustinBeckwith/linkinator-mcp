@@ -39,6 +39,7 @@ jobs:
           cache: npm
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
+      - run: npm run validate:mcp
       - run: npm run build
       - run: npm publish --provenance --access public
       - name: Install MCP Publisher
