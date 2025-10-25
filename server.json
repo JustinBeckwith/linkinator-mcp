@@ -10,15 +10,17 @@
     {
       "src": "https://raw.githubusercontent.com/JustinBeckwith/linkinator-mcp/main/site/linkinator-mcp.webp",
       "mimeType": "image/webp",
-      "sizes": ["any"]
+      "sizes": [
+        "any"
+      ]
     }
   ],
-  "version": "0.2.0",
+  "version": "0.2.1",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "linkinator-mcp",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "transport": {
         "type": "stdio"
       }
