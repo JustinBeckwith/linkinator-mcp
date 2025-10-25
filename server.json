@@ -10,7 +10,7 @@
     {
       "src": "https://raw.githubusercontent.com/JustinBeckwith/linkinator-mcp/main/site/linkinator-mcp.webp",
       "mimeType": "image/webp",
-      "sizes": "any"
+      "sizes": ["any"]
     }
   ],
   "version": "0.2.0",
