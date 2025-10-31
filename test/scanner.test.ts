@@ -62,6 +62,9 @@ describe('buildCheckOptions', () => {
 			port: 8080,
 			timeout: 5000,
 			recurse: true,
+			serverRoot: '/var/www',
+			directoryListing: true,
+			cleanUrls: true,
 			markdown: true,
 			checkCss: true,
 			checkFragments: true,
@@ -82,6 +85,9 @@ describe('buildCheckOptions', () => {
 			port: 8080,
 			timeout: 5000,
 			recurse: true,
+			serverRoot: '/var/www',
+			directoryListing: true,
+			cleanUrls: true,
 			markdown: true,
 			checkCss: true,
 			checkFragments: true,
@@ -255,6 +261,35 @@ describe('formatScanResults', () => {
 		const output = formatScanResults(result, params);
 
 		expect(output).toContain('Scanned 2 pages');
+	});
+
+	it('should truncate broken links list when more than 100', () => {
+		// Create 150 broken links
+		const brokenLinks = Array.from({ length: 150 }, (_, i) => ({
+			url: `https://example.com/broken${i}`,
+			status: 404,
+			state: LinkState.BROKEN,
+			parent: 'https://example.com',
+		}));
+
+		const result: ScanResult = {
+			passed: false,
+			links: brokenLinks,
+		};
+
+		const params: ScanParams = {
+			path: 'https://example.com',
+		};
+
+		const output = formatScanResults(result, params);
+
+		expect(output).toContain('Broken: 150');
+		expect(output).toContain('... and 50 more');
+		// Should show first 100 broken links
+		expect(output).toContain('https://example.com/broken0');
+		expect(output).toContain('https://example.com/broken99');
+		// Should not show the 101st link
+		expect(output).not.toContain('https://example.com/broken100');
 	});
 });
 
@@ -441,5 +476,98 @@ describe('scanPage', () => {
 			expect(notification.method).toBe('notifications/progress');
 			expect(notification.params.progressToken).toBe('test-token-123');
 		}
+	});
+
+	it('should track broken links in progress notifications', async () => {
+		const sendNotification = vi.fn().mockResolvedValue(undefined);
+
+		const pageStartListeners: Array<(url: string) => void> = [];
+		const linkListeners: Array<
+			(result: { url: string; status: number; state: string }) => void
+		> = [];
+
+		const { LinkChecker } = await import('linkinator');
+		// biome-ignore lint/complexity/useArrowFunction: vitest mock constructor requires function
+		(LinkChecker as unknown as Mock).mockImplementation(function () {
+			return {
+				// biome-ignore lint/complexity/useArrowFunction: needs to capture listeners
+				on: function (event: string, listener: unknown) {
+					if (event === 'pagestart') {
+						pageStartListeners.push(listener as (url: string) => void);
+					} else if (event === 'link') {
+						linkListeners.push(
+							listener as (result: {
+								url: string;
+								status: number;
+								state: string;
+							}) => void,
+						);
+					}
+				},
+				check: async () => {
+					// Simulate events with broken links
+					for (const listener of pageStartListeners) {
+						listener('https://example.com/page1');
+					}
+
+					// Send mix of OK and BROKEN links
+					for (let i = 0; i < 15; i++) {
+						for (const listener of linkListeners) {
+							listener({
+								url: `https://example.com/link${i}`,
+								status: i % 3 === 0 ? 404 : 200,
+								state: i % 3 === 0 ? LinkState.BROKEN : LinkState.OK,
+							});
+						}
+					}
+
+					return {
+						passed: false,
+						links: [],
+					};
+				},
+			};
+		});
+
+		const params: ScanParams = {
+			path: 'https://example.com',
+		};
+
+		const extra = {
+			_meta: {
+				progressToken: 'test-token-123',
+			},
+			sendNotification,
+			signal: new AbortController().signal,
+			requestId: 'test-request',
+		};
+
+		await scanPage(
+			params,
+			extra as unknown as RequestHandlerExtra<
+				ServerRequest,
+				ServerNotification
+			>,
+		);
+
+		// Should have sent notifications
+		expect(sendNotification).toHaveBeenCalled();
+
+		// Check that at least one notification includes broken link count
+		const calls = sendNotification.mock.calls;
+		const progressMessages = calls
+			.map(
+				(call) =>
+					(
+						call[0] as {
+							method: string;
+							params: { message: string };
+						}
+					).params.message,
+			)
+			.filter((msg) => msg.includes('broken'));
+
+		expect(progressMessages.length).toBeGreaterThan(0);
+		expect(progressMessages[0]).toMatch(/\d+ broken/);
 	});
 });
