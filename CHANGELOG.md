@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/JustinBeckwith/linkinator-mcp/compare/linkinator-mcp-v0.2.2...linkinator-mcp-v0.2.3) (2025-12-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency linkinator to v7.5.1 ([#12](https://github.com/JustinBeckwith/linkinator-mcp/issues/12)) ([78b181c](https://github.com/JustinBeckwith/linkinator-mcp/commit/78b181cee995fe133de47af35034d922f21ebd58))
+
 ## [0.2.2](https://github.com/JustinBeckwith/linkinator-mcp/compare/linkinator-mcp-v0.2.1...linkinator-mcp-v0.2.2) (2025-10-31)
 
 
