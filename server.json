@@ -15,12 +15,12 @@
       ]
     }
   ],
-  "version": "0.2.2",
+  "version": "0.2.3",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "linkinator-mcp",
-      "version": "0.2.2",
+      "version": "0.2.3",
       "transport": {
         "type": "stdio"
       }
