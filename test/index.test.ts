@@ -2,14 +2,12 @@ import { describe, expect, it, vi } from 'vitest';
 
 // Mock the MCP SDK to prevent actual server startup
 vi.mock('@modelcontextprotocol/sdk/server/mcp.js', () => ({
-	McpServer: vi.fn().mockImplementation(function (config) {
-		return {
-			name: config.name,
-			version: config.version,
-			tool: vi.fn(),
-			connect: vi.fn().mockResolvedValue(undefined),
-		};
-	}),
+	McpServer: vi.fn().mockImplementation((config) => ({
+		name: config.name,
+		version: config.version,
+		registerTool: vi.fn(),
+		connect: vi.fn().mockResolvedValue(undefined),
+	})),
 }));
 
 vi.mock('@modelcontextprotocol/sdk/server/stdio.js', () => ({
