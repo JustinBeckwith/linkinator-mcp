@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.5](https://github.com/JustinBeckwith/linkinator-mcp/compare/linkinator-mcp-v0.2.4...linkinator-mcp-v0.2.5) (2026-04-02)
+
+
+### Bug Fixes
+
+* align MCP SDK with zod v4 ([#21](https://github.com/JustinBeckwith/linkinator-mcp/issues/21)) ([d44941e](https://github.com/JustinBeckwith/linkinator-mcp/commit/d44941e338f97c10184f8ef762e4f02e7890c0d1))
+* **deps:** update dependency linkinator to v7.6.1 ([#17](https://github.com/JustinBeckwith/linkinator-mcp/issues/17)) ([88e3fdf](https://github.com/JustinBeckwith/linkinator-mcp/commit/88e3fdfbfa20bcc691bb6e64f97736cc430780e4))
+
 ## [0.2.4](https://github.com/JustinBeckwith/linkinator-mcp/compare/linkinator-mcp-v0.2.3...linkinator-mcp-v0.2.4) (2025-12-27)
 
 
