@@ -1,18 +1,22 @@
 #!/usr/bin/env node
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { z } from 'zod';
+import * as z from 'zod/v4';
 import { scanPage } from './scanner.js';
 
 // Create server instance
-const server = new McpServer({
-	name: 'linkinator',
-	version: '1.0.0',
-	capabilities: {
-		resources: {},
-		tools: {},
+const server = new McpServer(
+	{
+		name: 'linkinator',
+		version: '1.0.0',
 	},
-});
+	{
+		capabilities: {
+			resources: {},
+			tools: {},
+		},
+	},
+);
 
 // Zod schema for linkinator options
 const scanPageSchema = {
@@ -89,10 +93,13 @@ const scanPageSchema = {
 		.describe('Accept invalid SSL certificates'),
 };
 
-server.tool(
+server.registerTool(
 	'scan_page',
-	'Scan links in a webpage or local file path using linkinator. Checks for broken links, validates anchors, and can crawl recursively. Supports progress notifications for long-running scans.',
-	scanPageSchema,
+	{
+		description:
+			'Scan links in a webpage or local file path using linkinator. Checks for broken links, validates anchors, and can crawl recursively. Supports progress notifications for long-running scans.',
+		inputSchema: scanPageSchema,
+	},
 	async (params, extra) => scanPage(params, extra),
 );
 
