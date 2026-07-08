@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/justinbeckwith-linkinator-mcp-badge.png)](https://mseep.ai/app/justinbeckwith-linkinator-mcp)
+
 # Linkinator MCP Server
 
 [![npm version](https://img.shields.io/npm/v/linkinator-mcp.svg)](https://www.npmjs.com/package/linkinator-mcp)
