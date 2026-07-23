@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.0](https://github.com/JustinBeckwith/linkinator-mcp/compare/linkinator-mcp-v0.2.5...linkinator-mcp-v1.0.0) (2026-07-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* require Node.js 22 or later ([#36](https://github.com/JustinBeckwith/linkinator-mcp/issues/36))
+
+### Features
+
+* require Node.js 22 or later ([#36](https://github.com/JustinBeckwith/linkinator-mcp/issues/36)) ([3856f80](https://github.com/JustinBeckwith/linkinator-mcp/commit/3856f80e687e1d8e1ed9146c024db31165bb49eb))
+
+
+### Bug Fixes
+
+* **deps:** update dependency linkinator to v8 ([#35](https://github.com/JustinBeckwith/linkinator-mcp/issues/35)) ([42c88dc](https://github.com/JustinBeckwith/linkinator-mcp/commit/42c88dc992ce2e96a385116008b015bdb2a4956f))
+
 ## [0.2.5](https://github.com/JustinBeckwith/linkinator-mcp/compare/linkinator-mcp-v0.2.4...linkinator-mcp-v0.2.5) (2026-04-02)
 
 
